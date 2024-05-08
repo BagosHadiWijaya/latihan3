@@ -4,15 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KriteriaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Kriteria::latest()->get();
+        if ($request->ajax()) {
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    return view('pages.kriteria.actions', compact('row'));
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('pages.kriteria.index');
     }
 
     /**
@@ -20,7 +33,7 @@ class KriteriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.kriteria.create');
     }
 
     /**
@@ -28,7 +41,30 @@ class KriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'nama' => 'required|string|max:255',
+                'bobot' => 'required|numeric',
+                'tipe' => 'required|in:benefit,cost',
+            ]);
+
+            if ($validator->fails()) {
+                Alert::error('Error', $validator->errors()->first());
+                return redirect()->back()->withInput();
+            }
+
+            Kriteria::create([
+                'nama' => $request->nama,
+                'bobot' => $request->bobot,
+                'tipe' => $request->tipe,
+            ]);
+
+            Alert::toast('Data berhasil disimpan', 'success');
+            return redirect()->route('kriteria.index');
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return redirect()->route('kriteria.index');
+        }
     }
 
     /**
@@ -44,7 +80,7 @@ class KriteriaController extends Controller
      */
     public function edit(Kriteria $kriteria)
     {
-        //
+        return view('pages.kriteria.edit', compact('kriteria'));
     }
 
     /**
@@ -52,7 +88,30 @@ class KriteriaController extends Controller
      */
     public function update(Request $request, Kriteria $kriteria)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'nama' => 'required|string|max:255',
+                'bobot' => 'required|numeric',
+                'tipe' => 'required|in:benefit,cost',
+            ]);
+
+            if ($validator->fails()) {
+                Alert::error('Error', $validator->errors()->first());
+                return redirect()->back()->withInput();
+            }
+
+            $kriteria->update([
+                'nama' => $request->nama,
+                'bobot' => $request->bobot,
+                'tipe' => $request->tipe,
+            ]);
+
+            Alert::toast('Data berhasil diupdate', 'success');
+            return redirect()->route('kriteria.index');
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return redirect()->route('kriteria.index');
+        }
     }
 
     /**
@@ -60,6 +119,13 @@ class KriteriaController extends Controller
      */
     public function destroy(Kriteria $kriteria)
     {
-        //
+        try {
+            $kriteria->delete();
+            Alert::toast('Data berhasil dihapus', 'success');
+            return redirect()->route('kriteria.index');
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return redirect()->route('kriteria.index');
+        }
     }
 }
