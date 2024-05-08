@@ -4,15 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Alternatif;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AlternatifController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Alternatif::latest()->get();
+        if ($request->ajax()) {
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    return view('pages.alternatif.actions', compact('row'));
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('pages.alternatif.index');
     }
 
     /**
@@ -20,7 +32,7 @@ class AlternatifController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.alternatif.create');
     }
 
     /**
@@ -28,7 +40,26 @@ class AlternatifController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'nama' => 'required|string|max:255',
+            ]);
+
+            if ($validator->fails()) {
+                Alert::error('Error', $validator->errors()->first());
+                return redirect()->back()->withInput();
+            }
+
+            Alternatif::create([
+                'nama' => $request->nama,
+            ]);
+
+            Alert::toast('Data berhasil disimpan', 'success');
+            return redirect()->route('alternatif.index');
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return redirect()->route('alternatif.index');
+        }
     }
 
     /**
@@ -44,7 +75,7 @@ class AlternatifController extends Controller
      */
     public function edit(Alternatif $alternatif)
     {
-        //
+        return view('pages.alternatif.edit', compact('alternatif'));
     }
 
     /**
@@ -52,7 +83,26 @@ class AlternatifController extends Controller
      */
     public function update(Request $request, Alternatif $alternatif)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'nama' => 'required|string|max:255',
+            ]);
+
+            if ($validator->fails()) {
+                Alert::error('Error', $validator->errors()->first());
+                return redirect()->back()->withInput();
+            }
+
+            $alternatif->update([
+                'nama' => $request->nama,
+            ]);
+
+            Alert::toast('Data berhasil diupdate', 'success');
+            return redirect()->route('alternatif.index');
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return redirect()->route('alternatif.index');
+        }
     }
 
     /**
@@ -60,6 +110,13 @@ class AlternatifController extends Controller
      */
     public function destroy(Alternatif $alternatif)
     {
-        //
+        try {
+            $alternatif->delete();
+            Alert::toast('Data berhasil dihapus', 'success');
+            return redirect()->route('alternatif.index');
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return redirect()->route('alternatif.index');
+        }
     }
 }

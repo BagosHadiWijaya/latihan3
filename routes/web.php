@@ -49,17 +49,17 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         Route::get('/', [AlternatifController::class, 'index'])->name('alternatif.index');
         Route::get('create', [AlternatifController::class, 'create'])->name('alternatif.create');
         Route::post('store', [AlternatifController::class, 'store'])->name('alternatif.store');
-        Route::get('edit/{id}', [AlternatifController::class, 'edit'])->name('alternatif.edit');
-        Route::patch('update/{id}', [AlternatifController::class, 'update'])->name('alternatif.update');
-        Route::delete('delete/{id}', [AlternatifController::class, 'destroy'])->name('alternatif.delete');
+        Route::get('edit/{alternatif}', [AlternatifController::class, 'edit'])->name('alternatif.edit');
+        Route::patch('update/{alternatif}', [AlternatifController::class, 'update'])->name('alternatif.update');
+        Route::delete('delete/{alternatif}', [AlternatifController::class, 'destroy'])->name('alternatif.delete');
     });
 
     Route::prefix('kriteria')->group(function () {
         Route::get('/', [KriteriaController::class, 'index'])->name('kriteria.index');
         Route::get('create', [KriteriaController::class, 'create'])->name('kriteria.create');
         Route::post('store', [KriteriaController::class, 'store'])->name('kriteria.store');
-        Route::get('edit/{id}', [KriteriaController::class, 'edit'])->name('kriteria.edit');
-        Route::patch('update/{id}', [KriteriaController::class, 'update'])->name('kriteria.update');
-        Route::delete('delete/{id}', [KriteriaController::class, 'destroy'])->name('kriteria.delete');
+        Route::get('edit/{kriteria}', [KriteriaController::class, 'edit'])->name('kriteria.edit');
+        Route::patch('update/{kriteria}', [KriteriaController::class, 'update'])->name('kriteria.update');
+        Route::delete('delete/{kriteria}', [KriteriaController::class, 'destroy'])->name('kriteria.delete');
     });
 });
