@@ -12,9 +12,7 @@
   <link href="{{ asset('assets/home/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{{ asset('assets/home/vendor/aos/aos.css') }}" rel="stylesheet">
@@ -52,30 +50,29 @@
           <li><a class="nav-link scrollto" href="#services">Kriteria</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Pesanan</a></li>
           @if (Auth::check())
-            <li><a class="nav-link scrollto" href="#contact">Rating</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Rating</a></li>
           @endif
           <li><a class="nav-link scrollto" href="#cta">Rekomendasi</a></li>
           @if (Auth::check())
-            <li class="dropdown">
-              <a href="#">
-                <span>{{ Auth::user()->name }}</span>
-                <i class="bi bi-chevron-down"></i>
-              </a>
-              <ul>
-                <li>
-                  <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <a href="javascript:void(0)"
-                      onclick="event.preventDefault();
+          <li class="dropdown">
+            <a href="#">
+              <span>{{ Auth::user()->name }}</span>
+              <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul>
+              <li>
+                <form action="{{ route('logout') }}" method="POST">
+                  @csrf
+                  <a href="javascript:void(0)" onclick="event.preventDefault();
                   this.closest('form').submit();">
-                      Logout
-                    </a>
-                  </form>
-                </li>
-              </ul>
-            </li>
+                    Logout
+                  </a>
+                </form>
+              </li>
+            </ul>
+          </li>
           @else
-            <li><a class="getstarted scrollto" href="{{ route('login') }}">Mari Mulai</a></li>
+          <li><a class="getstarted scrollto" href="{{ route('login') }}">Mari Mulai</a></li>
           @endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -88,8 +85,7 @@
   <section id="hero" class="d-flex align-items-center">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
-          data-aos="fade-up" data-aos-delay="200">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
           <h1>Kenapa Harus PijatIn?</h1>
           <h2>
             PijatIn adalah aplikasi yang menyediakan layanan pijat panggilan yang dapat diakses dengan mudah dan
@@ -97,9 +93,9 @@
           </h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
             @if (Auth::check())
-              <a href="#portfolio" class="btn-get-started scrollto">Pesan Sekarang!</a>
+            <a href="#portfolio" class="btn-get-started scrollto">Pesan Sekarang!</a>
             @else
-              <a href="{{ route('login') }}" class="btn-get-started scrollto">Mari Mulai</a>
+            <a href="{{ route('login') }}" class="btn-get-started scrollto">Mari Mulai</a>
             @endif
           </div>
         </div>
@@ -121,11 +117,9 @@
           <div class="col-lg-3 col-md-6 footer-contact">
             <h3>PijatIn</h3>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              Yogyakarta <br><br>
+              <strong>Phone:</strong> 085963258741<br>
+              <strong>Email:</strong> pijatin@gmail.com<br>
             </p>
           </div>
 
@@ -143,16 +137,6 @@
     </div>
 
     <div class="container footer-bottom clearfix">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
     </div>
   </footer><!-- End Footer -->
 
