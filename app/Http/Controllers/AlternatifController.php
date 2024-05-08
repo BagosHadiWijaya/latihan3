@@ -43,6 +43,7 @@ class AlternatifController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'nama' => 'required|string|max:255',
+                'deskripsi' => 'nullable|string|max:255',
             ]);
 
             if ($validator->fails()) {
@@ -52,6 +53,7 @@ class AlternatifController extends Controller
 
             Alternatif::create([
                 'nama' => $request->nama,
+                'deskripsi' => $request->deskripsi,
             ]);
 
             Alert::toast('Data berhasil disimpan', 'success');
@@ -86,6 +88,7 @@ class AlternatifController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'nama' => 'required|string|max:255',
+                'deskripsi' => 'nullable|string|max:255',
             ]);
 
             if ($validator->fails()) {
@@ -95,6 +98,7 @@ class AlternatifController extends Controller
 
             $alternatif->update([
                 'nama' => $request->nama,
+                'deskripsi' => $request->deskripsi,
             ]);
 
             Alert::toast('Data berhasil diupdate', 'success');
