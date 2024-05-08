@@ -28,6 +28,11 @@ class RekomendasiController extends Controller
         $kriteria = Kriteria::all();
         $nilaiKriteria = NilaiKriteria::all();
 
+        if ($nilaiKriteria->count() == 0) {
+            Alert::error('Gagal', 'Data nilai kriteria belum diisi');
+            return redirect()->back();
+        }
+
         $dataTraining = [];
         foreach ($alternatif as $alt) {
             $data = [];
