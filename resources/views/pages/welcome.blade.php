@@ -115,9 +115,32 @@
       </div>
     </section><!-- End Portfolio Section -->
 
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="contact">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="text-center text-lg-start">
+          <h3>Dapatkan Rekomendasi Layanan</h3>
+        </div>
+        <form action="{{ route('rekomendasi.predict') }}" method="POST" class="php-email-form">
+          @csrf
+          <div class="form-group">
+            <label for="harga">Harga</label>
+            <input type="number" name="harga" class="form-control" id="harga" required>
+          </div>
+          <div class="form-group">
+            <label for="durasi">Durasi</label>
+            <input type="number" name="durasi" class="form-control" id="durasi" required>
+          </div>
+          <div class="text-center"><button type="submit">Dapatkan Rekomendasi</button></div>
+        </form>
+
+      </div>
+    </section><!-- End Cta Section -->
+
     @if (Auth::check())
       <!-- ======= Contact Section ======= -->
-      <section id="contact" class="contact">
+      <section id="contact" class="contact section-bg">
         <div class="container" data-aos="fade-up">
 
           <div class="section-title">

@@ -54,6 +54,7 @@
           @if (Auth::check())
             <li><a class="nav-link scrollto" href="#contact">Rating</a></li>
           @endif
+          <li><a class="nav-link scrollto" href="#cta">Rekomendasi</a></li>
           @if (Auth::check())
             <li class="dropdown">
               <a href="#">
@@ -135,7 +136,6 @@
               <li><i class="bx bx-chevron-right"></i> <a href="#">Alternatif</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Kriteria</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Pensanan</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Kontak</a></li>
             </ul>
           </div>
         </div>

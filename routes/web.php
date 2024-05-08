@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\RekomendasiController;
 use App\Http\Controllers\TerapisController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,8 @@ require __DIR__ . '/auth.php';
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('store-pesanan', [HomeController::class, 'storePesanan'])->name('store.pesanan');
 Route::post('store-nilai-kriteria', [HomeController::class, 'storeNilaiKriteria'])->name('store.nilai.kriteria');
+
+Route::post('rekomendasi/predict', [RekomendasiController::class, 'predict'])->name('rekomendasi.predict');
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
