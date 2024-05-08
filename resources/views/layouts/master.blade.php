@@ -31,47 +31,7 @@
           <div class="sidebar-toggle action-toggle"><i class="fas fa-bars"></i></div>
         </div>
         <div class="header-content">
-          <div class="notification dropdown me-2">
-            <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="far fa-bell"></i>
-              <span class="badge">12</span>
-            </a>
-            <ul class="dropdown-menu medium">
-              <li class="menu-header">
-                <a class="dropdown-item" href="#">Notification</a>
-              </li>
-              <li class="menu-content ps-menu">
-                <a href="#">
-                  <div class="message-icon text-danger">
-                    <i class="fas fa-exclamation-triangle"></i>
-                  </div>
-                  <div class="message-content read">
-                    <div class="body">There's incoming event, don't miss it!!</div>
-                    <div class="time">Just now</div>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="message-icon text-info">
-                    <i class="fas fa-info"></i>
-                  </div>
-                  <div class="message-content read">
-                    <div class="body">Your licence will expired soon</div>
-                    <div class="time">3 hours ago</div>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="message-icon text-success">
-                    <i class="fas fa-check"></i>
-                  </div>
-                  <div class="message-content">
-                    <div class="body">Successfully register new user</div>
-                    <div class="time">8 hours ago</div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="dropdown dropdown-menu-end">
+          <div class="dropdown dropdown-menu-end d-flex align-items-center">
             <a href="#" class="user-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="label">
                 <span></span>
@@ -83,9 +43,9 @@
             </a>
             <ul class="dropdown-menu small">
               <li class="menu-content ps-menu">
-                <a href="{{ route('profile.edit') }}">
+                {{-- <a href="{{ route('profile.edit') }}">
                   <div class="description"><i class="ti-user"></i> Profile</div>
-                </a>
+                </a> --}}
                 <form method="POST" action="{{ route('logout') }}">
                   @csrf
                   <a href="javascript:void(0)"
@@ -102,7 +62,7 @@
     </header>
     <nav class="main-sidebar ps-menu">
       <div class="sidebar-header">
-        <div class="text fs-4">PijatIn</div>
+        <span class="badge rounded-3 text-bg-primary fs-5">PI</span>
         <div class="close-sidebar action-toggle">
           <i class="ti-close"></i>
         </div>
