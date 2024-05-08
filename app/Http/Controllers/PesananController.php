@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PesananController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Pesanan::with(['alternatif', 'user', 'terapis'])->latest()->get();
+        if ($request->ajax()) {
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->make(true);
+        }
+        return view('pages.pesanan.index');
     }
 
     /**
@@ -60,6 +67,13 @@ class PesananController extends Controller
      */
     public function destroy(Pesanan $pesanan)
     {
-        //
+        try {
+            $pesanan->delete();
+            Alert::toast('Data berhasil dihapus', 'success');
+            return redirect()->route('pesanan.index');
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return redirect()->back();
+        }
     }
 }

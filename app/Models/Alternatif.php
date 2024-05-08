@@ -13,6 +13,18 @@ class Alternatif extends Model
 
     protected $fillable = [
         'nama',
+        'harga',
+        'durasi',
         'deskripsi',
     ];
+
+    public function nilaiKriteria()
+    {
+        return $this->hasMany(NilaiKriteria::class, 'id_alternatif', 'id');
+    }
+
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class, 'id_alternatif', 'id');
+    }
 }

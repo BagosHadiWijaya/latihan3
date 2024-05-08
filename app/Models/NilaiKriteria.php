@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pesanan extends Model
+class NilaiKriteria extends Model
 {
     use HasFactory;
 
-    protected $table = 'pesanan';
+    protected $table = 'nilai_kriteria';
 
     protected $fillable = [
-        'nama',
         'id_alternatif',
-        'id_user',
-        'id_terapis',
+        'id_kriteria',
+        'nilai'
     ];
 
     public function alternatif()
@@ -23,13 +22,8 @@ class Pesanan extends Model
         return $this->belongsTo(Alternatif::class, 'id_alternatif', 'id');
     }
 
-    public function user()
+    public function kriteria()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id');
-    }
-
-    public function terapis()
-    {
-        return $this->belongsTo(Terapis::class, 'id_terapis', 'id');
+        return $this->belongsTo(Kriteria::class, 'id_kriteria', 'id');
     }
 }

@@ -10,7 +10,7 @@
     <li class="menu-category">
       <span class="text-uppercase">Management</span>
     </li>
-    <li class="{{ request()->routeIs(['admin*', 'pelanggan*']) ? 'active' : '' }}">
+    <li class="{{ request()->routeIs(['admin*', 'pelanggan*', 'terapis*']) ? 'active' : '' }}">
       <a href="#" class="main-menu has-dropdown">
         <i class="fa-solid fa-users"></i>
         <span>User</span>
@@ -18,6 +18,9 @@
       <ul class="sub-menu">
         <li>
           <a href="{{ route('pelanggan.index') }}" class="link"><span>Pelanggan</span></a>
+        </li>
+        <li>
+          <a href="{{ route('terapis.index') }}" class="link"><span>Terapis</span></a>
         </li>
         <li>
           <a href="{{ route('pesanan.index') }}" class="link"><span>Pesanan</span></a>

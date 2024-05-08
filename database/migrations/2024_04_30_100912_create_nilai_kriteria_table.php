@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alternatif', function (Blueprint $table) {
+        Schema::create('nilai_kriteria', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('deskripsi')->nullable();
-            $table->integer('harga');
-            $table->integer('durasi');
+            $table->foreignId('id_alternatif')->constrained('alternatif');
+            $table->foreignId('id_kriteria')->constrained('kriteria');
+            $table->integer('nilai');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alternatif');
+        Schema::dropIfExists('nilai_kriteria');
     }
 };

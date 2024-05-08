@@ -38,41 +38,44 @@
 </head>
 
 <body>
-
+  @include('sweetalert::alert')
+  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">Arsha</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+      <h1 class="logo me-auto"><a href="{{ route('home') }}">PijatIn</a></h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="{{ route('login') }}">Get Started</a></li>
+          <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
+          <li><a class="nav-link scrollto" href="#about">Alternatif</a></li>
+          <li><a class="nav-link scrollto" href="#services">Kriteria</a></li>
+          <li><a class="nav-link scrollto" href="#portfolio">Pesanan</a></li>
+          @if (Auth::check())
+            <li><a class="nav-link scrollto" href="#contact">Rating</a></li>
+          @endif
+          @if (Auth::check())
+            <li class="dropdown">
+              <a href="#">
+                <span>{{ Auth::user()->name }}</span>
+                <i class="bi bi-chevron-down"></i>
+              </a>
+              <ul>
+                <li>
+                  <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <a href="javascript:void(0)"
+                      onclick="event.preventDefault();
+                  this.closest('form').submit();">
+                      Logout
+                    </a>
+                  </form>
+                </li>
+              </ul>
+            </li>
+          @else
+            <li><a class="getstarted scrollto" href="{{ route('login') }}">Mari Mulai</a></li>
+          @endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -86,12 +89,17 @@
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
           data-aos="fade-up" data-aos-delay="200">
-          <h1>Better Solutions For Your Business</h1>
-          <h2>We are team of talented designers making websites with Bootstrap</h2>
+          <h1>Kenapa Harus PijatIn?</h1>
+          <h2>
+            PijatIn adalah aplikasi yang menyediakan layanan pijat panggilan yang dapat diakses dengan mudah dan
+            cepat.
+          </h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="{{ route('login') }}" class="btn-get-started scrollto">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
-                class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            @if (Auth::check())
+              <a href="#portfolio" class="btn-get-started scrollto">Pesan Sekarang!</a>
+            @else
+              <a href="{{ route('login') }}" class="btn-get-started scrollto">Mari Mulai</a>
+            @endif
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -105,27 +113,12 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
-
-    <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6">
-            <h4>Join Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="footer-top">
       <div class="container">
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Arsha</h3>
+            <h3>PijatIn</h3>
             <p>
               A108 Adam Street <br>
               New York, NY 535022<br>
@@ -138,37 +131,13 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Beranda</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Alternatif</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Kriteria</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Pensanan</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Kontak</a></li>
             </ul>
           </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Social Networks</h4>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
-            <div class="social-links mt-3">
-              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>

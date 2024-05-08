@@ -25,6 +25,29 @@
                 </div>
               </div>
 
+              <div class="form-group">
+                <label for="harga" class="mb-1 control-label">Harga</label>
+                <div class="col-sm-12">
+                  <input type="number" class="form-control" id="harga" name="harga" placeholder="Harga"
+                    value="{{ old('harga') }}" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="durasi" class="mb-1 control-label">Durasi</label>
+                <div class="col-sm-12">
+                  <input type="number" class="form-control" id="durasi" name="durasi" placeholder="Durasi"
+                    value="{{ old('durasi') }}" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="deskripsi" class="mb-1 control-label">Deskripsi</label>
+                <div class="col-sm-12">
+                  <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi" required>{{ old('deskripsi') }}</textarea>
+                </div>
+              </div>
+
               <button type="submit" class="btn btn-primary w-25 ms-auto">
                 Submit
               </button>

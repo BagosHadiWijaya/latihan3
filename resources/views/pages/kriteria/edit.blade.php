@@ -27,16 +27,6 @@
               </div>
 
               <div class="form-group">
-                <label for="tipe" class="mb-1 control-label">Tipe</label>
-                <div class="col-sm-12">
-                  <select class="form-select" id="tipe" name="tipe" required>
-                    <option value="benefit" @if ($kriteria->tipe == 'benefit') selected @endif>Benefit</option>
-                    <option value="cost" @if ($kriteria->tipe == 'cost') selected @endif>Cost</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
                 <label for="bobot" class="mb-1 control-label">Bobot</label>
                 <div class="col-sm-12">
                   <input type="number" class="form-control" id="bobot" name="bobot" placeholder="Bobot"

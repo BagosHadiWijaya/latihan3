@@ -13,7 +13,11 @@ class Kriteria extends Model
 
     protected $fillable = [
         'nama',
-        'tipe',
         'bobot'
     ];
+
+    public function nilaiKriteria()
+    {
+        return $this->hasMany(NilaiKriteria::class, 'id_kriteria', 'id');
+    }
 }

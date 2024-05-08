@@ -43,6 +43,8 @@ class AlternatifController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'nama' => 'required|string|max:255',
+                'harga' => 'required|integer',
+                'durasi' => 'required|integer',
                 'deskripsi' => 'nullable|string|max:255',
             ]);
 
@@ -53,6 +55,8 @@ class AlternatifController extends Controller
 
             Alternatif::create([
                 'nama' => $request->nama,
+                'harga' => $request->harga,
+                'durasi' => $request->durasi,
                 'deskripsi' => $request->deskripsi,
             ]);
 
@@ -88,6 +92,8 @@ class AlternatifController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'nama' => 'required|string|max:255',
+                'harga' => 'required|integer',
+                'durasi' => 'required|integer',
                 'deskripsi' => 'nullable|string|max:255',
             ]);
 
@@ -98,6 +104,8 @@ class AlternatifController extends Controller
 
             $alternatif->update([
                 'nama' => $request->nama,
+                'harga' => $request->harga,
+                'durasi' => $request->durasi,
                 'deskripsi' => $request->deskripsi,
             ]);
 

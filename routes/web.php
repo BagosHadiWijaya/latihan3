@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\TerapisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 
-Route::get('/', function () {
-    return view('pages.welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('store-pesanan', [HomeController::class, 'storePesanan'])->name('store.pesanan');
+Route::post('store-nilai-kriteria', [HomeController::class, 'storeNilaiKriteria'])->name('store.nilai.kriteria');
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -34,6 +36,15 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         Route::get('edit/{user}', [PelangganController::class, 'edit'])->name('pelanggan.edit');
         Route::patch('update/{user}', [PelangganController::class, 'update'])->name('pelanggan.update');
         Route::delete('delete/{user}', [PelangganController::class, 'destroy'])->name('pelanggan.delete');
+    });
+
+    Route::prefix('terapis')->group(function () {
+        Route::get('/', [TerapisController::class, 'index'])->name('terapis.index');
+        Route::get('create', [TerapisController::class, 'create'])->name('terapis.create');
+        Route::post('store', [TerapisController::class, 'store'])->name('terapis.store');
+        Route::get('edit/{terapis}', [TerapisController::class, 'edit'])->name('terapis.edit');
+        Route::patch('update/{terapis}', [TerapisController::class, 'update'])->name('terapis.update');
+        Route::delete('delete/{terapis}', [TerapisController::class, 'destroy'])->name('terapis.delete');
     });
 
     Route::prefix('pesanan')->group(function () {

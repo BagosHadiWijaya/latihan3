@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kriteria;
+use App\Models\Terapis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class KriteriaController extends Controller
+class TerapisController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $data = Kriteria::latest()->get();
+        $data = Terapis::latest()->get();
         if ($request->ajax()) {
             return datatables()->of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    return view('pages.kriteria.actions', compact('row'));
+                    return view('pages.terapis.actions', compact('row'));
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
-        return view('pages.kriteria.index');
+        return view('pages.terapis.index');
     }
 
     /**
@@ -33,7 +33,7 @@ class KriteriaController extends Controller
      */
     public function create()
     {
-        return view('pages.kriteria.create');
+        return view('pages.terapis.create');
     }
 
     /**
@@ -44,7 +44,8 @@ class KriteriaController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'nama' => 'required|string|max:255',
-                'bobot' => 'required|numeric',
+                'alamat' => 'required|string|max:255',
+                'jenis_kelamin' => 'required|in:L,P',
             ]);
 
             if ($validator->fails()) {
@@ -52,24 +53,24 @@ class KriteriaController extends Controller
                 return redirect()->back()->withInput();
             }
 
-            Kriteria::create([
+            Terapis::create([
                 'nama' => $request->nama,
-                'bobot' => $request->bobot,
-                'tipe' => $request->tipe,
+                'alamat' => $request->alamat,
+                'jenis_kelamin' => $request->jenis_kelamin,
             ]);
 
-            Alert::toast('Data berhasil disimpan', 'success');
-            return redirect()->route('kriteria.index');
+            Alert::toast('Data terapis berhasil ditambahkan', 'success');
+            return redirect()->route('terapis.index');
         } catch (\Throwable $th) {
             Alert::error('Error', $th->getMessage());
-            return redirect()->route('kriteria.index');
+            return redirect()->route('terapis.index');
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Kriteria $kriteria)
+    public function show(Terapis $terapis)
     {
         //
     }
@@ -77,20 +78,21 @@ class KriteriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kriteria $kriteria)
+    public function edit(Terapis $terapis)
     {
-        return view('pages.kriteria.edit', compact('kriteria'));
+        return view('pages.terapis.edit', compact('terapis'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kriteria $kriteria)
+    public function update(Request $request, Terapis $terapis)
     {
         try {
             $validator = Validator::make($request->all(), [
                 'nama' => 'required|string|max:255',
-                'bobot' => 'required|numeric',
+                'alamat' => 'required|string|max:255',
+                'jenis_kelamin' => 'required|in:L,P',
             ]);
 
             if ($validator->fails()) {
@@ -98,31 +100,32 @@ class KriteriaController extends Controller
                 return redirect()->back()->withInput();
             }
 
-            $kriteria->update([
+            $terapis->update([
                 'nama' => $request->nama,
-                'bobot' => $request->bobot,
+                'alamat' => $request->alamat,
+                'jenis_kelamin' => $request->jenis_kelamin,
             ]);
 
-            Alert::toast('Data berhasil diupdate', 'success');
-            return redirect()->route('kriteria.index');
+            Alert::toast('Data terapis berhasil diubah', 'success');
+            return redirect()->route('terapis.index');
         } catch (\Throwable $th) {
             Alert::error('Error', $th->getMessage());
-            return redirect()->route('kriteria.index');
+            return redirect()->route('terapis.index');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kriteria $kriteria)
+    public function destroy(Terapis $terapis)
     {
         try {
-            $kriteria->delete();
-            Alert::toast('Data berhasil dihapus', 'success');
-            return redirect()->route('kriteria.index');
+            $terapis->delete();
+            Alert::toast('Data terapis berhasil dihapus', 'success');
+            return redirect()->route('terapis.index');
         } catch (\Throwable $th) {
             Alert::error('Error', $th->getMessage());
-            return redirect()->route('kriteria.index');
+            return redirect()->route('terapis.index');
         }
     }
 }

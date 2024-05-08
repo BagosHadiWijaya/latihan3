@@ -17,7 +17,6 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Kriteria</th>
-                  <th>Tipe</th>
                   <th>Bobot</th>
                   <th width="280px">Action</th>
                 </tr>
@@ -43,13 +42,6 @@
           {
             data: 'nama',
             name: 'nama'
-          },
-          {
-            data: 'tipe',
-            name: 'tipe',
-            render: function(data) {
-              return data.toUpperCase();
-            }
           },
           {
             data: 'bobot',
