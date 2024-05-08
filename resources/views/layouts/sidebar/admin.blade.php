@@ -10,7 +10,7 @@
     <li class="menu-category">
       <span class="text-uppercase">Management User</span>
     </li>
-    <li class="{{ request()->routeIs(['admin.guru*', 'siswa*']) ? 'active' : '' }}">
+    <li class="{{ request()->routeIs(['admin*', 'pelanggan*']) ? 'active' : '' }}">
       <a href="#" class="main-menu has-dropdown">
         <i class="fa-solid fa-users"></i>
         <span>User</span>
@@ -20,11 +20,11 @@
           <a href="{{ route('admin.guru.index') }}" class="link"><span>Admin</span></a>
         </li>
         <li>
-          <a href="element-tabs-collapse.html" class="link"><span>User</span></a>
+          <a href="element-tabs-collapse.html" class="link"><span>Pelanggan</span></a>
         </li>
       </ul>
     </li>
-    <li class="{{ request()->routeIs(['admin.kelas*', 'admin.course*']) ? 'active' : '' }}">
+    <li class="{{ request()->routeIs(['alternatif*', 'kriteria*']) ? 'active' : '' }}">
       <a href="#" class="main-menu has-dropdown">
         <i class="fa-solid fa-school"></i>
         <span>Management Data</span>
